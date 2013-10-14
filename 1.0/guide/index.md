@@ -4,7 +4,7 @@ KMobileConsole是用在移动端的小工具,可以模拟PC浏览器的console�
 
 * 版本：1.0
 * 作者：chenchen
-* 标签：
+* 标签：console
 * demo：[http://gallery.kissyui.com/KMobileConsole/1.0/demo/index.html](http://gallery.kissyui.com/KMobileConsole/1.0/demo/index.html)
 
 ## 初始化组件
@@ -38,3 +38,8 @@ KMobileConsole是用在移动端的小工具,可以模拟PC浏览器的console�
 
 * 在debug信息区最下方输入框中可以运行js代码(比较鸡肋)
 ![运行代码](http://pic.yupoo.com/ccking/DeCLXx7R/yCEiu.png)
+
+## 兼容
+* iOS 6
+* iOS 7
+* Android 4+
