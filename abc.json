@@ -1,0 +1,15 @@
+{
+    "name": "KMobileConsole",
+    "version": "1.0",
+    "desc": "",
+    "cover": "",
+    "tag":"console",
+    "author": {
+        "name": "chenchen",
+        "email": "wb-chenchen.c@alibaba-inc.com",
+        "page": ""
+    },
+    "type": "kissy-gallery",
+    "type-url": "http://gallery.kissyui.com/guide",
+    "githubName":"ccforward"
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name = "viewport" content = "user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>KMobileConsole的demo</title>
+    <script src="http://g.tbcdn.cn/kissy/k/1.3.0/kissy-min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
+</head>
+<body>
+<h2>KMobileConsole的demo</h2>
+<h1 id="J_test" data-some="some_data">this is a test</h1>
+<script>
+    var S = KISSY;
+    if (S.Config.debug) {
+        var srcPath = "../../../";
+        S.config({
+            packages:[
+                {
+                    name:"gallery",
+                    path:srcPath,
+                    charset:"utf-8",
+                    ignorePackageNameInUri:true
+                }
+            ]
+        });
+    }
+
+    S.use('gallery/KMobileConsole/1.0/index', function (S, KMobileConsole) {
+        var mConsole = new KMobileConsole()
+        mConsole.log("Array",[11,22,'javascript is a good language']);
+
+        mConsole.log("Object",{dept:'taobao UED', year:2013, array:[1111, 1212, '呵呵',{maomao:'一师是个好学校', huanhuan:'这真真是极好的'}]});
+
+        mConsole.log({str:'a String',arr:[100, 500, {num:2046,strs:'another String'}]})
+
+        mConsole.log("DOM Element", document.getElementById("J_test"));
+
+        // 错误函数
+        whatTheFuck();
+    })
+</script>
+</body>
+</html>
