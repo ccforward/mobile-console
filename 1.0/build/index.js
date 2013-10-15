@@ -1,10 +1,10 @@
 /*
 combined files : 
 
-KMobileConsole
+gallery/KMobileConsole/1.0/index
 
 */
-KISSY.add('KMobileConsole',function(S){
+KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
     var D = S.DOM,
         E = S.Event,
         debugEle, aVars=[];
