@@ -1,4 +1,4 @@
-KISSY.add('KMobileConsole',function(S){
+KISSY.add(function(S){
     var D = S.DOM,
         E = S.Event,
         debugEle, aVars=[];
