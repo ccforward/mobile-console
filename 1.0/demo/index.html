@@ -14,7 +14,8 @@
     var S = KISSY;
 
     S.use('gallery/KMobileConsole/1.0/index', function (S, KMobileConsole) {
-        var mConsole = new KMobileConsole()
+        // var mConsole = new KMobileConsole('pc');  在PC上开启console调试
+        var mConsole = new KMobileConsole();
         mConsole.log("Array",[11,22,'javascript is a good language']);
 
         mConsole.log("Object",{dept:'taobao UED', year:2013, array:[1111, 1212, '呵呵',{maomao:'一师是个好学校', huanhuan:'这真真是极好的'}]});

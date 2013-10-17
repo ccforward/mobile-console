@@ -3,12 +3,12 @@ KISSY.add(function(S){
         E = S.Event,
         debugEle, aVars=[];
 
-    function KMobileConsole() {
-        this.init();
+    function KMobileConsole(pc) {
+        this.init(pc);
     }
 
     KMobileConsole.prototype = {
-        init: function(){
+        init: function(pc){
             var self = this,
                 orientation = 0;
             debugEle = D.create('<div>');
@@ -36,8 +36,10 @@ KISSY.add(function(S){
                     }
 
                     //PC上测试
-                    // window.scrollTo(1,1);
-                    // self.showDebugInfo();
+                    if(pc === 'pc'){
+                        window.scrollTo(1,1);
+                        self.showDebugInfo();
+                    }
 
                     horientation = window.orientation;
             });
