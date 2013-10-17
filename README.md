@@ -26,7 +26,7 @@ KMobileConsole是用在移动端的小工具,可以模拟PC浏览器的console�
 
         mConsole.log("DOM Element", document.getElementById("J_test"));	
 
-        //可以输出系统出错信息 (未定义的函数)
+        //可以输出系统出错信息 (未定义的函数) 相当于断点,之后的信息不能输出
         whatTheFuck();
 
     })
