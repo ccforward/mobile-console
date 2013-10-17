@@ -217,7 +217,7 @@ KISSY.add(function(S){
             }else{
                 var objNode = D.create('<div>'),
                     arrow = D.create('<span>');
-                D.append(D.create('▶  Object'), arrow);
+                D.append(D.create('>>  Object'), arrow);
                 D.css(arrow, {color:'#808080', fontSize:'12px'});
                 D.append(arrow, objNode);
                 D.css(objNode, 'display', 'inline');
@@ -226,7 +226,7 @@ KISSY.add(function(S){
                 E.on(objNode, 'click', function(evt){
                     if(this.expanded){
                         // TODO
-                        this.firstChild.textContent = "▶  Object";
+                        this.firstChild.textContent = ">>  Object";
                         while(this.childNodes.length >1){
                             this.removeChild(this.lastChild);
                         }

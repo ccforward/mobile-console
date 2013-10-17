@@ -1,13 +1,13 @@
 {
     "name": "KMobileConsole",
     "version": "1.0",
-    "desc": "",
+    "desc": "mobile模拟PC的console",
     "cover": "",
     "tag":"console",
     "author": {
-        "name": "chenchen",
-        "email": "wb-chenchen.c@alibaba-inc.com",
-        "page": ""
+        "name": "晨辰",
+        "email": "cc.ccking@gmail.com",
+        "page": "http://ccforward.net"
     },
     "type": "kissy-gallery",
     "type-url": "http://gallery.kissyui.com/guide",
