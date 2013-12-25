@@ -1,20 +1,15 @@
-/*
-combined files : 
-
-gallery/KMobileConsole/1.0/index
-
-*/
-KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
+KISSY.add(function(S){
     var D = S.DOM,
         E = S.Event,
-        debugEle, aVars=[];
+        debugEle, 
+        aDebugVars=[]; //存放所有debug的数组
 
-    function KMobileConsole() {
-        this.init();
+    function KMobileConsole(degree, pc) {
+        this.init(degree, pc);
     }
 
     KMobileConsole.prototype = {
-        init: function(){
+        init: function(degree, pc){
             var self = this,
                 orientation = 0;
             debugEle = D.create('<div>');
@@ -30,11 +25,11 @@ KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
 
             E.on(window, orientEvent, function() {
                     // 移动设备上使用
-                    if(window.orientation!=orientation && window.orientation==-90){
+                    if(window.orientation != orientation && window.orientation == degree){
                         window.scrollTo(1,1);   
                         self.showDebugInfo();
                     }else{
-                        if(window.orientation!=-90){
+                        if(window.orientation != degree){
                             if(debugEle.parentNode){
                                 document.body.removeChild(debugEle); 
                             }
@@ -42,8 +37,10 @@ KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
                     }
 
                     //PC上测试
-                    // window.scrollTo(1,1);
-                    // self.showDebugInfo();
+                    if(pc === 'pc'){
+                        window.scrollTo(1,1);
+                        self.showDebugInfo();
+                    }
 
                     horientation = window.orientation;
             });
@@ -54,7 +51,7 @@ KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
                 // error.filename 
                 // error.lineno
                 
-                aVars.push({type:"error", message: error.originalEvent});
+                aDebugVars.push({type:"error", message: error.originalEvent});
             });
         },
         log: function(name,value){
@@ -66,34 +63,35 @@ KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
         },
         showDebugInfo: function(){
             var self = this;
+            // 先删除所有的内容 重新生成
             while(debugEle.firstChild){
                 debugEle.removeChild(debugEle.firstChild)
             }
             D.append(debugEle, S.one('body'));
             D.css(debugEle, 'display', 'block');
             //所有的debug信息
-            for(var i=0; i<aVars.length; i++){
+            for(var i=0; i<aDebugVars.length; i++){
                 var msg = D.create('<div>');
-                switch(aVars[i].type){
+                switch(aDebugVars[i].type){
                     case "log":
                         //单条详细信息
-                        for(var j=0; j<aVars[i].message.length; j++){
-                            var item = self.showMsg(aVars[i].message[j]);
+                        for(var j=0; j<aDebugVars[i].message.length; j++){
+                            var item = self.showMsg(aDebugVars[i].message[j]);
                             D.css(item, {verticalAlign: 'top', padding: '2px'});
                             D.append(item, msg)
                         }
                         D.append(msg, debugEle);
                         break;
                     case "error":
-                        self.insertEle(msg, aVars[i].message.message, '#f00');
-                        self.insertEle(msg, '&nbsp;'+aVars[i].message.filename+'  line: '+aVars[i].message.lineno, "#808080");
+                        self.insertEle(msg, aDebugVars[i].message.message, '#f00');
+                        self.insertEle(msg, '&nbsp;'+aDebugVars[i].message.filename+'  line: '+aDebugVars[i].message.lineno, "#808080");
                         D.append(msg, debugEle);
                         break;
                 }
                 D.css(msg, 'border-bottom', '1px solid #eee');
             }
 
-            // 使用eval 模拟console的代码执行  (console.log的信息不会显示)
+            // 使用eval 模拟console的代码执行  (console.log的信息不会显示 米有返回值)
             var exeEle = D.create('<div>'),
                 exeInput = D.create('<input>');
             D.css(exeEle,'width','100%');
@@ -106,11 +104,11 @@ KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
                 if(evt.keyCode==13){
                     try{
                         var obj = eval(this.value);
-                        aVars.push({type:"log",message:[obj]});
+                        aDebugVars.push({type:"log",message:[obj]});
                     }catch(e){
                         
                         //存放出错信息
-                        aVars.push({type:"error",message:[e]});
+                        aDebugVars.push({type:"error",message:[e]});
                     }
                     self.showDebugInfo();
                 }
@@ -160,7 +158,7 @@ KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
 
         showHtm: function (value){
             var self = this;
-            // nodeType 元素:1 属性:2 文本:3 注释:8 文档:9
+            // nodeType {元素:1, 属性:2, 文本:3, 注释:8, 文档:9}
             if(value.nodeType == 3){  //textnode
                 var nodeSpan = D.create("<span>");
                 self.insertEle(nodeSpan, value.nodeValue);
@@ -209,7 +207,7 @@ KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
             //  return node;
             }
             if(value.length){
-                // node.appendChild(document.createTextNode("["));
+                // 数组
                 D.append(D.create('['), node);
                 for(var i=0;i<value.length;i++){
                     D.append(self.showMsg(value[i]), node);
@@ -221,6 +219,7 @@ KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
                 D.css(node, 'vertical-align', 'top');
                 D.append(D.create(']'), node);
             }else{
+                // 对象
                 var objNode = D.create('<div>'),
                     arrow = D.create('<span>');
                 D.append(D.create('>>  Object'), arrow);
@@ -229,11 +228,12 @@ KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
                 D.css(objNode, 'display', 'inline');
                 objNode.objVal = value;
                 objNode.expanded = false;
+                // 点击展开
                 E.on(objNode, 'click', function(evt){
                     if(this.expanded){
                         // TODO
                         this.firstChild.textContent = ">>  Object";
-                        while(this.childNodes.length >1){
+                        while(this.childNodes.length > 1){
                             this.removeChild(this.lastChild);
                         }
                         this.expanded = false;
@@ -270,8 +270,8 @@ KISSY.add('gallery/KMobileConsole/1.0/index',function(S){
         },
 
         pushLogs: function (obj){
-            if(debugEle.parentNode) return; //console is open, don't record events
-            aVars.push({type:"log",message:obj});
+            if(debugEle.parentNode) return; //console open 不在记录信息
+            aDebugVars.push({type:"log",message:obj});
         }
     }
 
