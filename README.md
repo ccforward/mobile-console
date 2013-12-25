@@ -32,9 +32,9 @@ KMobileConsole是用在移动端的小工具,可以模拟PC浏览器的console�
         whatTheFuck();
 
     })
-## 在pc上开启console 
-    //添加参数 'pc'
-    var mConsole = new KMobileConsole('pc')
+##  旋转角度 和 在pc上开启console 
+    //添加参数 'degree', 'pc'
+    var mConsole = new KMobileConsole(90, 'pc')
 
 ## 查看debug信息
 * 把移动设备设置为可旋转模式,然后设备向右旋转90度即可查看debug信息
