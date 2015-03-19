@@ -1,3 +1,5 @@
+[已经从KISSY组件中脱离成独立文件，点此查看](https://github.com/ccforward/cc/tree/master/mobileConsole)
+
 ## 综述
 
 KMobileConsole是用在移动端的小工具,可以模拟PC浏览器的console进行debug.
